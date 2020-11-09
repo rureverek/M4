@@ -10,11 +10,12 @@
 //            : 
 // System     : SystemVerilog IEEE 1800-2005
 //            :
-// Author     : Mark Zwolinski
+// Author     : Tom Kazmierski & Mark Zwolinski & Piotr Mikulowski
 //            : School of Electronics and Computer Science
 //            : University of Southampton
 //            : Southampton SO17 1BJ, UK
 //            : mz@ecs.soton.ac.uk
+//            : pm4u19@soton.ac.uk
 //
 // Revision   : Version 1.0 16/10/17
 /////////////////////////////////////////////////////////////////////
