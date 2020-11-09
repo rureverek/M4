@@ -10,13 +10,13 @@
 //            : 
 // System     : SystemVerilog IEEE 1800-2005
 //            :
-// Author     : 
+// Author     : Piotr Mikulowski
 //            : School of Electronics and Computer Science
 //            : University of Southampton
 //            : Southampton SO17 1BJ, UK
-//            : 
+//            : pm4u19@soton.ac.uk
 //
-// Revision   : Version 1.0 
+// Revision   : Version 1.0 09/11/2020
 /////////////////////////////////////////////////////////////////////
 
 module sequencer #(parameter N=8) (input logic start, clock, Q0, n_rst,
