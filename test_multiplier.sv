@@ -22,9 +22,9 @@
 module test_multiplier;
 
 logic start, n_rst, clock; 
-logic [3:0] Min, Qin; 
+logic [7:0] Min; 
 logic ready; 
-logic[7:0] AQ;
+logic[15:0] AQ;
 
 multiplier m0 (.*);
 
@@ -45,15 +45,16 @@ initial
   begin
   start = '0;
   Min = '0;
-  Qin = '0;
+  //Qin = '0;
   #5ns start = '1;
-  Min = 3;
-  Qin = 5;
+  Min = 32;
+  #10ns
+  Min = 16;
   @(posedge ready) // Wait for ready to become true
-    if (AQ==Min*Qin)
-      $display("Test passed: at %t Min = %d, Qin = %d, AQ = %d", $time, Min, Qin, AQ);
+    if (AQ==32*16)
+      $display("Test passed: at %t Min = %d, Qin = %d, AQ = %d", $time, 32, 16, AQ);
     else
-      $display("Test failed: at %t Min = %d, Qin = %d, AQ = %d", $time, Min, Qin, AQ);
+      $display("Test failed: at %t Min = %d, Qin = %d, AQ = %d", $time, 32, 16, AQ);
   end
   
 endmodule

@@ -20,25 +20,31 @@
 //            : modified for DE1-SoC: mz, 16/10/17
 /////////////////////////////////////////////////////////////////////
 
-module register (input logic clock, reset, add, shift, C,
-              input logic[3:0] Qin, Sum, output logic[7:0] AQ);
+module register (input logic clock, reset, add_shift,add_nshift, C, q_en, m_en,
+              input logic[7:0] Min, Sum, output logic[15:0] AQ);
 
 logic Creg; // MSB carry bit storage
 
 always_ff @ (posedge clock)
-  if (reset)  // clear C,A and load Q, M
+  if (reset && q_en)  // clear C,A and load Q, M
   begin
    Creg <= 0;
-   AQ[7:4] <= 0;
-   AQ[3:0] <= Qin; // load multiplier into Q
+   AQ[15:8] <= 0;
+   AQ[7:0] <= Min; // load multiplier into Q
   end
-  else if (add) // store Sum in C,A
+  else if (add_shift) // out Sum in A, Q and shift 
   begin
-   Creg <= C;
-   AQ[7:4] <= Sum;
+ //  Creg <= C;
+ //  AQ[7:4] <= Sum;
+   {Creg,AQ} <= {1'b0,C,Sum,AQ[7:1]};
   end
-  else if (shift) // shift A, Q
+  else if (add_nshift)// shift A, Q
   begin
-   {Creg,AQ} <= {1'b0,Creg,AQ[7:1]};
+   {Creg,AQ} <= {1'b0,C,AQ[15:1]};
   end
+  else if (!reset && m_en)
+  begin
+  AQ[7:0] <= AQ[15:8];
+  end
+  
 endmodule

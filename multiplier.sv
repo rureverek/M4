@@ -20,17 +20,17 @@
 //            : modified for DE1-SoC: mz, 16/10/17
 /////////////////////////////////////////////////////////////////////
 
-module multiplier(input logic start, n_rst, clock, input logic [3:0] Min, Qin, 
-                  output logic ready, output logic[7:0] AQ);
+module multiplier(input logic start, n_rst, clock, input logic [7:0] Min,
+                  output logic ready, output logic[15:0] AQ);
 
-logic C, reset, shift, add;
-logic [3:0] Sum, M;
+logic C, reset, add_shift, q_en, m_en;
+logic [7:0] Sum, M;
 
 
-adder A0(.A(AQ[7:4]), .M(M), .C(C), .Sum(Sum));
+adder A0(.A(AQ[15:8]), .M(M), .C(C), .Sum(Sum));
 register R0 (.*);
 reg_m R1 (.*);
 sequencer S(.start(start), .clock(clock), .reset(reset), .Q0(AQ[0]), .n_rst(n_rst),
- .add(add), .shift(shift), .ready(ready));
+ .add_shift(add_shift), .add_nshift(add_nshift) , .ready(ready), .q_en(q_en), .m_en(m_en));
   
 endmodule

@@ -19,11 +19,11 @@
 // Revision   : Version 1.0 16/10/17
 /////////////////////////////////////////////////////////////////////
 
-module reg_m #(parameter N=4) (input logic clock, reset, 
+module reg_m #(parameter N=8) (input logic clock, reset, q_en, m_en,
               input logic[N-1:0] Min, output logic[N-1:0] M);
 
 always_ff @ (posedge clock)
-  if (reset)  // clear C,A and load Q, M
+  if (reset && m_en)  // clear C,A and load Q, M
     M <= Min;
 
 endmodule
